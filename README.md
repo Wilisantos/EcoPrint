@@ -20,5 +20,4 @@ EcoPrint é uma aplicação web que ajuda os usuários a encontrar centros de re
 ecoprint/ ├── index.html ├── style.css ├── script.js ├── Perfil/ │ └── perfil.html ├── Cadastro/ │ └── cadastro.html ├── Login/ │ └── login.html ├── impressoras.html ├── produtos.html ├── relatorio.html └── arquivo/ ├── lucros.png └── tempo.png
 
 ## Documentação
-[Documentação] (https://docs.google.com/document/d/1Zm6nmulaJu3fJYMNcRddMSM-b92T4cvNEk9EtmTKf0U/edit?tab=t.0)
-
+Visite: https://docs.google.com/document/d/1Zm6nmulaJu3fJYMNcRddMSM-b92T4cvNEk9EtmTKf0U/edit?tab=t.0
