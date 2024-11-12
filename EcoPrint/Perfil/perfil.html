@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>EcoPrint | Perfil</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,500;0,700;1,400&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="perfil.css" />
+
+</head>
+
+<body>
+    <header>
+        <button id="menu-button">☰</button>
+        <h1>EcoPrint</h1>
+        <nav id="dropdown-menu">
+            <a href="../index.html">Home</a>
+            <a href="../impressoras.html">Impressoras</a>
+            <a href="../produtos.html">Produtos</a>
+            <a href="../relatorio.html">Relatório Estoque</a>
+        </nav>
+    </header>
+    <div class="header2">
+        <h2>Perfil</h2>
+        <span class="negrito">Papel: </span>
+        <p id="perfil"></p>
+        <span class="negrito">Usuário: </span>
+        <p id="user"></p>
+        <span class="negrito">Nome: </span>
+        <p id="nome"></p>
+        
+        <img class="avatar" src="../Arquivo/avatar.png" alt="Avatar" />
+    </div>
+    <script>
+        const usuario = JSON.parse(localStorage.getItem("userLogado"));
+
+        if (usuario) {
+            document.getElementById("user").innerText = usuario.userCad;
+            document.getElementById("nome").innerText = usuario.nomeCad;
+            document.getElementById("perfil").innerText = usuario.perfilCad;
+        } else {
+            document.getElementById("user").innerText = "Usuário não encontrado";
+            document.getElementById("nome").innerText = "Nome não encontrado";
+            document.getElementById("perfil").innerText = "Perfil não encontrado";
+        }
+    </script>
+
+    <script>
+        // Script para o menu do site
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuButton = document.getElementById("menu-button");
+            const dropdownMenu = document.getElementById("dropdown-menu");
+
+            menuButton.addEventListener("click", function () {
+                if (dropdownMenu.style.opacity === "1") {
+                    dropdownMenu.style.opacity = "0";  // Torna o menu invisível
+                    dropdownMenu.style.transform = "translateY(-10px)";  // Move para fora da tela
+                } else {
+                    dropdownMenu.style.display = "block";  // Garante que o menu esteja em display block
+                    setTimeout(function () {  // Dá tempo para a transição de opacidade funcionar
+                        dropdownMenu.style.opacity = "1";  // Torna o menu visível
+                        dropdownMenu.style.transform = "translateY(0)";  // Move para a posição normal
+                    }, 10); // Um pequeno delay para iniciar a transição
+                }
+            });
+
+            // Clique fora do menu para fechar
+            document.addEventListener("click", function (event) {
+                if (!menuButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                    dropdownMenu.style.opacity = "0";  // Torna o menu invisível
+                    dropdownMenu.style.transform = "translateY(-10px)";  // Move para fora da tela
+                    setTimeout(function () {  // Após o tempo da transição, oculta o menu
+                        dropdownMenu.style.display = "none";
+                    }, 300);  // Tempo suficiente para concluir a animação
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

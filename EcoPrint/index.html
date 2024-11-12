@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoPrint</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Incluir a API do Google Maps -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFJ50veYEzJyzbdevYs6yAYGh5Z3PUrPw&callback=initMap"async defer></script>
+    <script src="index.js" defer></script>
+</head>
+
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <button id="menu-button">☰</button>
+        <h1>ECOPRINT</h1>
+        <nav id="dropdown-menu">
+            <a href="Perfil/perfil.html">Perfil</a>
+            <a href="impressoras.html">Impressoras</a>
+            <a href="produtos.html">Produtos</a>
+            <a href="relatorio.html">Relatório Estoque</a>
+            <a href="Cadastro/cadastro.html">Cadastrar</a>
+            <a href="Login/login.html">Sair</a>
+        </nav>
+    </header>
+
+  <!-- Conteúdo Principal -->
+  <div class="container">
+    <!-- Seção Resultados e Mapa (flex) -->
+    <section class="resultados-e-mapa">
+        <!-- Seção Resultados -->
+        <section class="resultados">
+            <h2>Resultados</h2>
+            <div class="resultados-container">
+                <a href="lucro.html" class="resultado-item">
+                    <img src="arquivo/lucros.png" alt="Ícone de Dinheiro" class="resultado-icon">
+                    <p>Lucro</p>
+                </a>
+                <a href="tempo.html" class="resultado-item">
+                    <img src="arquivo/tempo.png" alt="Ícone de Tempo" class="resultado-icon">
+                    <p>Tempo</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- Mapa (Google Maps) -->
+        <div id="mapa" class="mapa"></div>
+        <!-- Campo de Pesquisa -->
+        <input id="pac-input" class="controls" type="text" placeholder="Pesquisar">
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>© 2024 EcoPrint. Todos os direitos reservados.</p>
+    </footer>
+</body>
+
+</html>
