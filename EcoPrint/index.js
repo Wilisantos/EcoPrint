@@ -1,7 +1,7 @@
-if (localStorage.getItem("token") == null) {
-    alert("É necessário estar logado para continuar")
-    window.location.href = "Login/login.html"
-}
+//if (localStorage.getItem("token") == null) {
+ //   alert("É necessário estar logado para continuar")
+ ////   window.location.href = "Login/login.html"
+//}
 document.body.onload = () => {
     btnSearch.addEventListener('click', doSearch)
 }

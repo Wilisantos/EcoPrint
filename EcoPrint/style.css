@@ -232,4 +232,97 @@ footer:hover {
         height: 250px;
     }
 }
- 
+
+/* da partir daqui */
+/* da partir daqui // da partir daqui // da partir daqui // da partir daqui // da partir daqui */
+
+.impressoras-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-container, .printer-list {
+    margin-bottom: 20px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+form button {
+    background-color: #009879;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #007f67;
+}
+
+.printer-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.printer-list li {
+    padding: 10px;
+    margin-bottom: 5px;
+    background-color: #eaeaea;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/*aa parqewishdjasghjfhasdfjklsdghfjkdhsfhdsfhsdjfsdh */
+
+/* Detalhes da Impressora */
+.printer-details {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 20px auto;
+    display: none;
+}
+
+.printer-details h3 {
+    font-size: 22px;
+    color: #009879;
+}
+
+.printer-details p {
+    margin-bottom: 10px;
+}
+
+.printer-details button {
+    background-color: #009879;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.printer-details button:hover {
+    background-color: #007f67;
+}
