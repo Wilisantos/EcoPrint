@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+
+  pg_database:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRESo: postgres
+    volumes:
+      - /workspace:/opt/pg_database/workspace
+
+  cloudbeaver:
+    image: dbeaver/cloudbeaver
+    ports: ["8978:8978"]
+    hostname: cloudbeaver
+    container_name: DBeaver
+    volumes:
+      - ./workspace:/opt/cloudbeaver/workspace
+    tty: true
+    depends_on:
+      - pg_database
+
+#LOGIN/SENHA DLOUVBEAVER 'Cloudbeaver!1'
