@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>EcoPrint</title>
+  <meta name="description" content="EcoPrint: Revolucionando o processo de impressão com sustentabilidade">
+  <meta name="keywords" content="impressão, sustentabilidade, eco, reciclável, tinta, economia">
+
+  <!-- Favicons -->
+  <link href="assets/img/planeta-terra.png" rel="icon">
+  <link href="assets/img/planeta-terra.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&family=Poppins:wght@100;300;400;500;700&family=Raleway:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- Google Maps Script -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAorK10sxXiMFRxpexeRqgUdoP4MW7ebIo&libraries=places&callback=initMap" async defer></script>
+</head>
+
+<body class="index-page">
+
+  <!-- Header -->
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img id="imgL" src="assets/img/titulo-ecoPrint.png" alt="EcoPrint Logo">
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="#hero" class="active">Home</a></li>
+          <li><a href="#about">Perfil</a></li>
+          <li class="dropdown">
+            <a href="#">Relatórios <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="#features">Insumos</a></li>
+              <li><a href="#">Relatório de Estoque</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#">Cadastrar <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="Impressora.html">Impressora</a></li>
+              <li><a href="#">Usuário</a></li>
+            </ul>
+          </li>
+          <li><a href="#pricing">Sair</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Section -->
+  <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section light-background">
+      <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+        <div class="row gy-5">
+          <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
+            <h1 class="sitename"><span>E</span>coPrint</h1>
+            <p>Nosso objetivo é revolucionar o processo de impressão, minimizando drasticamente o desperdício de tinta. Com a sustentabilidade na "Ponta dos Dedos", estamos projetando um futuro mais verde e eficiente.</p>
+            <div class="d-flex">
+              <a href="#about" class="btn-get-started">Descarte e Recarga Consciente</a>
+            </div>
+          </div>
+          <div class="col-lg-6 order-1 order-lg-2">
+            <img src="assets/img/hero-img.png" class="img-fluid" alt="Imagem de herói">
+          </div>
+        </div>
+      </div>
+
+      <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
+        <div class="container position-relative">
+          <div class="row gy-4 mt-5">
+            <div class="col-xl-3 col-md-6">
+              <div class="icon-box">
+                <div class="icon"><i class="bi bi-easel"></i></div>
+                <h4 class="title"><a href="#" class="stretched-link">Tempo</a></h4>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="icon-box">
+                <div class="icon"><i class="bi bi-gem"></i></div>
+                <h4 class="title"><a href="#" class="stretched-link">Lucro</a></h4>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="icon-box">
+                <div class="icon"><i class="bi bi-geo-alt"></i></div>
+                <h4 class="title"><a href="#" class="stretched-link">Magni Dolores</a></h4>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="icon-box">
+                <div class="icon"><i class="bi bi-command"></i></div>
+                <h4 class="title"><a href="impressora.html" class="stretched-link">Impressoras</a></h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
+            <p class="who-we-are">Descarte & Recarga</p>
+            <h3>A sustentabilidade não se limita às paredes da gráfica</h3>
+            <p class="fst-italic">Nosso serviço também integra uma API do Google Maps que localiza locais de reciclagem próximos, contribuindo para uma economia circular e promovendo a destinação adequada de resíduos. A gráfica pode se destacar no mercado, reduzir os custos e, ao mesmo tempo, fazer a diferença no meio ambiente.</p>
+            <ul>
+              <li><i class="bi bi-check-circle"></i> Veja em destaque os pontos fixados no mapa</li>
+              <a href="https://www.google.com/maps?ll=-19.860081,-43.960781&z=14&t=m&hl=pt-BR&gl=BR&mapclient=embed&q=reciclagem+toner" class="read-more"><span>Abra no Google Maps</span><i class="bi bi-arrow-right"></i></a>
+            </ul>
+          </div>
+          <div class="col-lg-6 about-images" data-aos="fade-up" data-aos-delay="200">
+            <div class="row gy-4">
+              <div class="col-lg-12">
+                <div id="map"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer id="footer" class="footer light-background">
+    <div class="container">
+      <div class="copyright text-center">
+        <p>© <span>2024</span> <strong class="px-1 sitename">EcoPrint.</strong> <span>Todos os direitos reservados.</span></p>
+      </div>
+      <div class="credits">
+        Disciplina  <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
