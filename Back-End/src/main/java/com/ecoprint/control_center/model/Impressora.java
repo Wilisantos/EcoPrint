@@ -14,7 +14,7 @@ public class Impressora {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;  // autoincremental
+    private int id;  // autoincremental
 
     @ManyToOne
     @JoinColumn(name = "tipo_impressora_id", nullable = false)

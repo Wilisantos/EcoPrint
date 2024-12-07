@@ -1,112 +1,68 @@
 package com.ecoprint.control_center.controller;
 
+import com.ecoprint.control_center.controller.mapper.ImpressoraMapper;
 import com.ecoprint.control_center.dto.ImpressoraRequestDTO;
 import com.ecoprint.control_center.model.Impressora;
-import com.ecoprint.control_center.model.TipoImpressora;
-import com.ecoprint.control_center.repository.ImpresoraRepository;
+import com.ecoprint.control_center.repository.ImpressoraRepository;
 import com.ecoprint.control_center.repository.TipoImpressoraRepository;
-import org.springframework.data.domain.PageRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/impressoras")
+@RequiredArgsConstructor
 public class ImpressoraController {
 
-    @Autowired
-    private ImpresoraRepository impressoraRepository;
+    private final ImpressoraRepository impressoraRepository;
 
-    @Autowired
-    private TipoImpressoraRepository tipoImpressoraRepository;
+    private final TipoImpressoraRepository tipoImpressoraRepository;
+
+    private final ImpressoraMapper impressoraMapper;
 
     // CREATE - Adiciona uma nova impressora
     @PostMapping
-    public ResponseEntity<Impressora> create(@RequestBody ImpressoraRequestDTO impressoraRequestDTO) {
-        // Buscar o tipo de impressora baseado no ID do DTO
-        Optional<TipoImpressora> tipoImpressoraOpt = tipoImpressoraRepository.findById(impressoraRequestDTO.tipoImpressora());
+    @ResponseStatus(HttpStatus.CREATED)
+    public Impressora create(@RequestBody ImpressoraRequestDTO impressoraRequestDTO) {
 
-        if (!tipoImpressoraOpt.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
-        }
+         tipoImpressoraRepository.findById(impressoraRequestDTO
+                 .tipoImpressora()).orElseThrow(() -> new IllegalArgumentException("Não existe o tipoImpressao"));
 
-        TipoImpressora tipoImpressora = tipoImpressoraOpt.get();
+        Impressora impressora = impressoraMapper.toModel(impressoraRequestDTO);
+        return impressoraRepository.save(impressora);
 
-        Impressora impressora = Impressora.builder()
-                .tipoImpressora(tipoImpressora)
-                .modelo(impressoraRequestDTO.modelo())
-                .capacidade(impressoraRequestDTO.capacidade())
-                .build();
-
-        impressoraRepository.save(impressora);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(impressora);
     }
 
     // READ - Obtém todas as impressoras
     @GetMapping
-    public Page<Impressora> getAll(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-        return impressoraRepository.findAll(PageRequest.of(page, size));
+    @ResponseStatus(HttpStatus.OK)
+    public Page<Impressora> getAll(Pageable pageable) {
+        return impressoraRepository.findAll(pageable);
     }
 
-    // READ - Obtém uma impressora por ID
+    // READ por ID - Obtém uma impressora por ID
     @GetMapping("/{id}")
-    public ResponseEntity<Impressora> getImpressoraById(@PathVariable Long id) {
-        Optional<Impressora> impressoraOpt = impressoraRepository.findById(id);
+    public Impressora getImpressoraById(@PathVariable Integer id) {
 
-        if (!impressoraOpt.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
+        return impressoraRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Impressora nao existe"));
 
-        return ResponseEntity.status(HttpStatus.OK).body(impressoraOpt.get());
     }
 
     // UPDATE - Atualiza os dados de uma impressora
     @PutMapping("/{id}")
-    public ResponseEntity<Impressora> updateImpressora(@PathVariable Long id, @RequestBody ImpressoraRequestDTO impressoraRequestDTO) {
-        Optional<Impressora> impressoraOpt = impressoraRepository.findById(id);
-
-        if (!impressoraOpt.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-
-        // Buscar o tipo de impressora baseado no ID do DTO
-        Optional<TipoImpressora> tipoImpressoraOpt = tipoImpressoraRepository.findById(impressoraRequestDTO.tipoImpressora());
-
-        if (!tipoImpressoraOpt.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
-        }
-
-        TipoImpressora tipoImpressora = tipoImpressoraOpt.get();
-        Impressora impressora = impressoraOpt.get();
-
-        // Atualizando os dados da impressora
-        impressora.setTipoImpressora(tipoImpressora);
-        impressora.setModelo(impressoraRequestDTO.modelo());
-        impressora.setCapacidade(impressoraRequestDTO.capacidade());
-
-        impressoraRepository.save(impressora);
-
-        return ResponseEntity.status(HttpStatus.OK).body(impressora);
+    public Impressora updateImpressora(@PathVariable Integer id, @RequestBody ImpressoraRequestDTO impressoraRequestDTO) {
+        Impressora impressora = impressoraMapper.toModel(id, impressoraRequestDTO);
+        return impressoraRepository.save(impressora);
     }
 
     // DELETE - Deleta uma impressora por ID
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteImpressora(@PathVariable Long id) {
-        Optional<Impressora> impressoraOpt = impressoraRepository.findById(id);
+    public void deleteImpressora(@PathVariable Integer id) {
+        impressoraRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Impressora nao existe"));
+        impressoraRepository.deleteById(id);
 
-        if (!impressoraOpt.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-
-        impressoraRepository.delete(impressoraOpt.get());
-
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
 }

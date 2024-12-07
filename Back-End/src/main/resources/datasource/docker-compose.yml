@@ -11,7 +11,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRESo: postgres
     volumes:
-      - /workspace:/opt/pg_database/workspace
+      - ./workspace:/opt/pg_database/workspace
 
   cloudbeaver:
     image: dbeaver/cloudbeaver
@@ -24,4 +24,4 @@ services:
     depends_on:
       - pg_database
 
-#LOGIN/SENHA DLOUVBEAVER 'Cloudbeaver!1'
+#LOGIN/SENHA cbadmin & Cloudbeaver!1

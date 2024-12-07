@@ -43,7 +43,7 @@ public class TipoImpressoraController {
 
     // READ - Obtém um tipo de impressora por ID
     @GetMapping("/{id}")
-    public ResponseEntity<TipoImpressora> getTipoImpressoraById(@PathVariable Long id) {
+    public ResponseEntity<TipoImpressora> getTipoImpressoraById(@PathVariable Integer id) {
         Optional<TipoImpressora> tipoImpressoraOpt = tipoImpressoraRepository.findById(id);
 
         if (!tipoImpressoraOpt.isPresent()) {
@@ -55,7 +55,7 @@ public class TipoImpressoraController {
 
     // UPDATE - Atualiza um tipo de impressora
     @PutMapping("/{id}")
-    public ResponseEntity<TipoImpressora> updateTipoImpressora(@PathVariable Long id, @RequestBody TipoImpressoraRequestDTO tipoImpressoraRequestDTO) {
+    public ResponseEntity<TipoImpressora> updateTipoImpressora(@PathVariable Integer id, @RequestBody TipoImpressoraRequestDTO tipoImpressoraRequestDTO) {
         Optional<TipoImpressora> tipoImpressoraOpt = tipoImpressoraRepository.findById(id);
 
         if (!tipoImpressoraOpt.isPresent()) {
@@ -72,7 +72,7 @@ public class TipoImpressoraController {
 
     // DELETE - Deleta um tipo de impressora por ID
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTipoImpressora(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteTipoImpressora(@PathVariable Integer id) {
         Optional<TipoImpressora> tipoImpressoraOpt = tipoImpressoraRepository.findById(id);
 
         if (!tipoImpressoraOpt.isPresent()) {

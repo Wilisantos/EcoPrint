@@ -14,7 +14,7 @@ public class TipoImpressora {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;  //autoincremental
+    private int id;  //autoincremental
 
     @Column(nullable = false, unique = true)
     private String tipo;

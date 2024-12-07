@@ -14,7 +14,7 @@ public class Residuo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;  // autoincremental
+    private int id;  // autoincremental
 
     @ManyToOne
     @JoinColumn(name = "tipo_residuo_id", nullable = false)

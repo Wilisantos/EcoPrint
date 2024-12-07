@@ -1,8 +1,8 @@
 package com.ecoprint.control_center.dto;
 
 public record ProdutoRequestDTO(
-        Long id,
-        Long tipoProduto,
+        int id,
+        int tipoProduto,
         Long valor,
         String descricao
 ) {}
