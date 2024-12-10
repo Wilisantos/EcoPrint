@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: control-center
+  jpa:
+    open-in-view: false
+
+  jackson:
+    date-format: "yyyy-MM-dd HH:mm:ss"
+    default-property-inclusion: non_null
+    deserialization:
+      fail-on-null-for-primitives: true
+
+  profiles:
+    active: ${SCOPE:stage}

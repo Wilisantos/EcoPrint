@@ -574,11 +574,19 @@ section,
   overflow: clip;
 }
 
+#print-from {
+  color: var(--default-color);
+  background-color: var(--background-color);
+  padding: 5px 20px;
+  scroll-margin-top: 5px;
+  overflow: clip;
+}
+
 @media (max-width: 1199px) {
 
   section,
   .section {
-    scroll-margin-top: 66px;
+    scroll-margin-top: 30px;
   }
 }
 
@@ -623,7 +631,7 @@ section,
 .hero {
   width: 100%;
   position: relative;
-  padding: 60px 0 0 0;
+  padding: 5px 0 0 0;
 }
 
 .hero .container {
@@ -634,7 +642,7 @@ section,
 .hero h2 {
   font-size: 48px;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .hero h2 .accent {
@@ -701,7 +709,7 @@ section,
 }
 
 .hero .icon-boxes {
-  padding-bottom: 60px;
+  padding-bottom: 30px;
   z-index: 4;
 }
 

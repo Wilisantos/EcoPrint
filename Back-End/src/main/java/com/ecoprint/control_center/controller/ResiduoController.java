@@ -1,73 +1,63 @@
 package com.ecoprint.control_center.controller;
 
+import com.ecoprint.control_center.controller.mapper.ResiduoMapper;
 import com.ecoprint.control_center.dto.ResiduoRequestDTO;
 import com.ecoprint.control_center.model.Residuo;
-import com.ecoprint.control_center.model.TipoResiduo;
 import com.ecoprint.control_center.repository.ResiduoRepository;
 import com.ecoprint.control_center.repository.TipoResiduoRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/residuos")
+@RequiredArgsConstructor
 public class ResiduoController {
 
     private final ResiduoRepository residuoRepository;
     private final TipoResiduoRepository tipoResiduoRepository;
+    private final ResiduoMapper residuoMapper;
 
-    public ResiduoController(ResiduoRepository residuoRepository, TipoResiduoRepository tipoResiduoRepository) {
-        this.residuoRepository = residuoRepository;
-        this.tipoResiduoRepository = tipoResiduoRepository;
-    }
-
-    // Criar um novo Residuo
+    // CREATE - Adiciona um novo resíduo
     @PostMapping
-    public ResponseEntity<String> createResiduo(@RequestBody ResiduoRequestDTO dto) {
-        Optional<TipoResiduo> tipoResiduoOpt = tipoResiduoRepository.findById(dto.tipoResiduo());
+    @ResponseStatus(HttpStatus.CREATED)
+    public Residuo create(@RequestBody ResiduoRequestDTO residuoRequestDTO) {
 
-        if (tipoResiduoOpt.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("TipoResiduo com ID " + dto.tipoResiduo() + " não encontrado.");
-        }
+        tipoResiduoRepository.findById(residuoRequestDTO.tipoResiduo())
+                .orElseThrow(() -> new IllegalArgumentException("Tipo de resíduo não encontrado"));
 
-        Residuo residuo = Residuo.builder()
-                .tipoResiduo(tipoResiduoOpt.get())
-                .quantidade(0) // Define quantidade inicial
-                .build();
-
-        residuoRepository.save(residuo);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body("Residuo criado com sucesso.");
+        Residuo residuo = residuoMapper.toModel(residuoRequestDTO);
+        return residuoRepository.save(residuo);
     }
 
+    // READ - Obtém todos os resíduos
     @GetMapping
-    public Page<Residuo> getAll(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-        return residuoRepository.findAll(PageRequest.of(page, size));
+    @ResponseStatus(HttpStatus.OK)
+    public Page<Residuo> getAll(Pageable pageable) {
+        return residuoRepository.findAll(pageable);
     }
 
-    // Atualizar quantidade de um Residuo
-    @PutMapping("/{id}/quantidade")
-    public ResponseEntity<String> updateQuantidade(@PathVariable Long id, @RequestBody int quantidade) {
-        Optional<Residuo> residuoOpt = residuoRepository.findById(id);
+    // READ por ID - Obtém um resíduo por ID
+    @GetMapping("/{id}")
+    public Residuo getResiduoById(@PathVariable Integer id) {
+        return residuoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Resíduo não encontrado"));
+    }
 
-        if (residuoOpt.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Residuo com ID " + id + " não encontrado.");
-        }
+    // UPDATE - Atualiza os dados de um resíduo
+    @PutMapping("/{id}")
+    public Residuo updateResiduo(@PathVariable Integer id, @RequestBody ResiduoRequestDTO residuoRequestDTO) {
+        Residuo residuo = residuoMapper.toModel(id, residuoRequestDTO);
+        return residuoRepository.save(residuo);
+    }
 
-        Residuo residuo = residuoOpt.get();
-        residuo.setQuantidade(quantidade);
-        residuoRepository.save(residuo);
-
-        return ResponseEntity.status(HttpStatus.OK)
-                .body("Quantidade do residuo atualizada com sucesso.");
+    // DELETE - Deleta um resíduo por ID
+    @DeleteMapping("/{id}")
+    public void deleteResiduo(@PathVariable Integer id) {
+        residuoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Resíduo não encontrado"));
+        residuoRepository.deleteById(id);
     }
 }

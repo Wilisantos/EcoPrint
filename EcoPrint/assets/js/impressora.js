@@ -1,94 +1,140 @@
-// Impressora
-
 document.addEventListener("DOMContentLoaded", () => {
     const printerForm = document.getElementById("add-printer-form");
     const printerList = document.getElementById("printer-list");
-    const printerDetails = document.getElementById("printer-details");
-    const detailsName = document.getElementById("details-name");
-    const detailsModel = document.getElementById("details-model");
-    const detailsPages = document.getElementById("details-pages");
-    const removePrinterButton = document.getElementById("remove-printer");
-    const editPrinterButton = document.getElementById("edit-printer");
+    let savedPrinters = [];
 
-    let selectedPrinterIndex = null;
+    // Função para carregar as impressoras
+    async function carregarTabelaImpressora() {
+        try {
+            const response = await fetch('http://localhost:3000/printers');
+            if (!response.ok) throw new Error("Erro ao carregar as impressoras.");
+            savedPrinters = await response.json();
+            renderPrinterTable();
+        } catch (error) {
+            console.error("Erro:", error.message);
+        }
+    }
 
-    // Carregar impressoras salvas no localStorage
-    const savedPrinters = JSON.parse(localStorage.getItem("printers")) || [];
-    savedPrinters.forEach((printer, index) => addPrinterToList(printer, index));
+    // Função para renderizar a tabela de impressoras
+    function renderPrinterTable() {
+        printerList.innerHTML = "";
+        savedPrinters.forEach((printer, index) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${printer.name}</td>
+                <td>${printer.model}</td>
+                <td>
+                    <button class="btn btn-info btn-sm" onclick="showPrinterDetails(${index})">Editar</button>
+                    <button class="btn btn-danger btn-sm" onclick="removePrinter(${index})">Remover</button>
+                </td>
+            `;
+            printerList.appendChild(row);
+        });
 
-    // Evento de submissão do formulário
+        if (savedPrinters.length === 0) {
+            const emptyRow = document.createElement("tr");
+            emptyRow.innerHTML = `<td colspan="3" class="text-center">Nenhuma impressora disponível.</td>`;
+            printerList.appendChild(emptyRow);
+        }
+    }
+
+    // Função para exibir detalhes e editar impressora
+    window.showPrinterDetails = (index) => {
+        const printer = savedPrinters[index];
+        const newName = prompt("Novo nome da impressora:", printer.name);
+        const newModel = prompt("Novo modelo da impressora:", printer.model);
+        const newPages = prompt("Novas páginas impressas:", printer.pages || 0);
+
+        if (newName && newModel && !isNaN(newPages)) {
+            const updatedPrinter = {
+                ...printer,
+                name: newName,
+                model: newModel,
+                pages: parseInt(newPages, 10),
+            };
+            editPrinter(updatedPrinter);
+        }
+    };
+
+    // Função para editar impressora no servidor
+    async function editPrinter(updatedPrinter) {
+        try {
+            const response = await fetch(`http://localhost:3000/printers/${updatedPrinter.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedPrinter),
+            });
+            if (response.ok) {
+                alert("Impressora editada com sucesso!");
+                carregarTabelaImpressora();
+            } else {
+                alert("Erro ao editar impressora.");
+            }
+        } catch (error) {
+            console.error("Erro ao editar impressora:", error);
+        }
+    }
+
+    // Função para remover impressora
+    window.removePrinter = (index) => {
+        const printerId = savedPrinters[index].id;
+        if (confirm("Tem certeza que deseja remover esta impressora?")) {
+            deletePrinter(printerId);
+        }
+    };
+
+    // Função para remover impressora no servidor
+    async function deletePrinter(printerId) {
+        try {
+            const response = await fetch(`http://localhost:3000/printers/${printerId}`, {
+                method: 'DELETE',
+            });
+            if (response.ok) {
+                alert("Impressora removida com sucesso!");
+                carregarTabelaImpressora();
+            } else {
+                alert("Erro ao remover impressora.");
+            }
+        } catch (error) {
+            console.error("Erro ao remover impressora:", error);
+        }
+    }
+
+    // Função para adicionar impressora
     printerForm.addEventListener("submit", (event) => {
         event.preventDefault();
 
         const printerName = document.getElementById("printer-name").value;
         const printerModel = document.getElementById("printer-model").value;
+        const newPrinter = { name: printerName, model: printerModel, pages: 0, id: Date.now() };
 
-        const printer = { name: printerName, model: printerModel, pages: 0 }; // Inicializa com 0 páginas
-        savedPrinters.push(printer);
-
-        // Salvar no localStorage
-        localStorage.setItem("printers", JSON.stringify(savedPrinters));
-
-        addPrinterToList(printer, savedPrinters.length - 1);
-
+        addPrinter(newPrinter);
         printerForm.reset();
     });
 
-    // Função para adicionar impressora na lista
-    function addPrinterToList(printer, index) {
-        const li = document.createElement("li");
-        li.textContent = `${printer.name} - ${printer.model}`;
-        li.addEventListener("click", () => showPrinterDetails(index));
-        printerList.appendChild(li);
-    }
-// Exibe os detalhes da impressora
-function showPrinterDetails(index) {
-    const printer = savedPrinters[index];
-    selectedPrinterIndex = index;
-
-    detailsName.textContent = `Nome: ${printer.name}`;
-    detailsModel.textContent = `Modelo: ${printer.model}`;
-    detailsPages.textContent = `Páginas Impressas: ${printer.pages}`;
-
-    printerDetails.style.display = "block";
-}
-
-    // Remover impressora
-    removePrinterButton.addEventListener("click", () => {
-        if (selectedPrinterIndex !== null) {
-            savedPrinters.splice(selectedPrinterIndex, 1);
-            localStorage.setItem("printers", JSON.stringify(savedPrinters));
-
-            // Recarregar a lista de impressoras
-            printerList.innerHTML = "";
-            savedPrinters.forEach((printer, index) => addPrinterToList(printer, index));
-
-            printerDetails.style.display = "none";
-        }
-    });
-
-    // Editar impressora
-    editPrinterButton.addEventListener("click", () => {
-        if (selectedPrinterIndex !== null) {
-            const printer = savedPrinters[selectedPrinterIndex];
-
-            const newName = prompt("Novo nome da impressora:", printer.name);
-            const newModel = prompt("Novo modelo:", printer.model);
-            const newPages = prompt("Novas páginas impressas:", printer.pages);
-
-            if (newName && newModel && newPages) {
-                printer.name = newName;
-                printer.model = newModel;
-                printer.pages = newPages;
-
-                localStorage.setItem("printers", JSON.stringify(savedPrinters));
-
-                // Recarregar a lista de impressoras
-                printerList.innerHTML = "";
-                savedPrinters.forEach((printer, index) => addPrinterToList(printer, index));
-
-                printerDetails.style.display = "none";
+    // Função para adicionar impressora no servidor
+    async function addPrinter(newPrinter) {
+        try {
+            const response = await fetch('http://localhost:3000/printers', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newPrinter),
+            });
+            if (response.ok) {
+                alert("Impressora adicionada com sucesso!");
+                carregarTabelaImpressora();
+            } else {
+                alert("Erro ao adicionar impressora.");
             }
+        } catch (error) {
+            console.error("Erro ao adicionar impressora:", error);
         }
-    });
+    }
+
+    // Carregar a tabela de impressoras ao carregar a página
+    carregarTabelaImpressora();
 });

@@ -1,0 +1,116 @@
+[
+  {
+    "name": "Epson L3150",
+    "model": "Preto e Branco",
+    "pages": 0,
+    "id": 2
+  },
+  {
+    "name": "HP 12c",
+    "model": "Multifuncional",
+    "pages": 0,
+    "id": 3
+  },
+  {
+    "name": "Epson L3152",
+    "model": "Impressora jato de tinta",
+    "pages": 0,
+    "id": 4
+  },
+  {
+    "name": "Canon G5010",
+    "model": "Impressora a laser",
+    "pages": 0,
+    "id": 5
+  },
+  {
+    "name": "Fiber 3D",
+    "model": "Impressora 3D",
+    "pages": 0,
+    "id": 6
+  },
+  {
+    "name": "Versalink C505S",
+    "model": "Impressora multifuncional",
+    "pages": 0,
+    "id": 7
+  },
+  {
+    "name": "Zebra Zt230",
+    "model": "Impressora LED",
+    "pages": 0,
+    "id": 8
+  },
+  {
+    "name": "InkJet G1023",
+    "model": "Preto e branco",
+    "pages": 0,
+    "id": 9
+  },
+  {
+    "name": "Epson L3150\t",
+    "model": "Multifuncional",
+    "pages": 0,
+    "id": 1733793921425
+  },
+  {
+    "name": "HP LaserJet Pro MFP M428fdw",
+    "model": "Multifuncional a Laser",
+    "pages": 2500,
+    "id": 6
+  },
+  {
+    "name": "Canon PIXMA G3020",
+    "model": "Impressora Multifuncional",
+    "pages": 1500,
+    "id": 7
+  },
+  {
+    "name": "Brother HL-L2370DW",
+    "model": "Impressora a Laser",
+    "pages": 3200,
+    "id": 8
+  },
+  {
+    "name": "Epson EcoTank L3150",
+    "model": "Multifuncional",
+    "pages": 120,
+    "id": 9
+  },
+  {
+    "name": "Samsung Xpress SL-M2020W",
+    "model": "Impressora a Laser",
+    "pages": 800,
+    "id": 10
+  },
+  {
+    "name": "Xerox Phaser 6510DN",
+    "model": "Impressora a Laser Colorida",
+    "pages": 1800,
+    "id": 11
+  },
+  {
+    "name": "Ricoh SP 210SU",
+    "model": "Impressora Monocromática",
+    "pages": 2500,
+    "id": 12
+  },
+  {
+    "name": "Kyocera ECOSYS P5026cdw",
+    "model": "Impressora a Laser Colorida",
+    "pages": 2200,
+    "id": 13
+  },
+  {
+    "name": "Lexmark MB2236adw",
+    "model": "Impressora Multifuncional a Laser",
+    "pages": 1200,
+    "id": 14
+  },
+  {
+    "name": "OKI B512dn",
+    "model": "Impressora a Laser Monocromática",
+    "pages": 3000,
+    "id": 15
+  }
+]

@@ -44,14 +44,14 @@ public class TipoResiduoController {
 
     // READ - Busca um tipo de resíduo pelo ID
     @GetMapping("/{id}")
-    public ResponseEntity<TipoResiduo> findById(@PathVariable Long id) {
+    public ResponseEntity<TipoResiduo> findById(@PathVariable Integer id) {
         Optional<TipoResiduo> tipoResiduoOpt = tipoResiduoRepository.findById(id);
         return tipoResiduoOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     // UPDATE - Atualiza um tipo de resíduo existente
     @PutMapping("/{id}")
-    public ResponseEntity<TipoResiduo> update(@PathVariable Long id, @RequestBody TipoResiduoRequestDTO tipoResiduoRequestDTO) {
+    public ResponseEntity<TipoResiduo> update(@PathVariable Integer id, @RequestBody TipoResiduoRequestDTO tipoResiduoRequestDTO) {
         Optional<TipoResiduo> tipoResiduoOpt = tipoResiduoRepository.findById(id);
 
         if (tipoResiduoOpt.isEmpty()) {
@@ -69,7 +69,7 @@ public class TipoResiduoController {
 
     // DELETE - Remove um tipo de resíduo pelo ID
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
         if (!tipoResiduoRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }

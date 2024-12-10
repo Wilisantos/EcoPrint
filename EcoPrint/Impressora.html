@@ -3,10 +3,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoPrint</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
 
     <!-- Favicons -->
     <link href="assets/img/planeta-terra.png" rel="icon">
@@ -15,8 +13,7 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
         rel="stylesheet">
 
     <!-- Vendor CSS Files -->
@@ -28,77 +25,76 @@
     <!-- Main CSS File -->
     <link href="assets/css/main.css" rel="stylesheet">
 </head>
+<body class="index-page">
+    <header id="header" class="header d-flex align-items-center sticky-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+            <a href="index.html" class="logo d-flex align-items-center">
+                <img id="imgL" src="assets/img/titulo-ecoPrint.png" alt="EcoPrint Logo">
+            </a>
 
-<body class="index-page"></body>
-
-<header id="header" class="header d-flex align-items-center sticky-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-
-        <a href="index.html" class="logo d-flex align-items-center">
-            <img id="imgL" src="assets/img/titulo-ecoPrint.png" alt="">
-
-        </a>
-
-        <nav id="navmenu" class="navmenu">
-            <ul>
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="#about">Perfil</a></li>
-                <li class="dropdown"><a href="#"><span>Relatórios</span> <i
-                            class="bi bi-chevron-down toggle-dropdown"></i></a>
-                    <ul>
-                        <li><a href="#features">Insumos</a></li>
-                        <li><a href="#">Relatório de Estoque</a></li>
-
-                    </ul>
-                <li class="dropdown"><a href="#"><span>Cadastrar</span> <i
-                            class="bi bi-chevron-down toggle-dropdown"></i></a>
-                    <ul>
-                        <li><a href="Impressora.html">Impressora</a></li>
-                        <li><a href="#">Usuário</a></li>
-                    </ul>
-                <li><a href="#pricing">Sair</a></li>
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="#about">Perfil</a></li>
+                    <li class="dropdown">
+                        <a href="#"><span>Relatórios</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="#features">Insumos</a></li>
+                            <li><a href="#">Relatório de Estoque</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#"><span>Cadastrar</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="Impressora.html">Impressora</a></li>
+                            <li><a href="#">Usuário</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#pricing">Sair</a></li>
+                </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-        </nav>
+            </nav>
+        </div>
+    </header>
 
-    </div>
-</header>
+    <main>
+        <div class="container mt-4">
+            <!-- Formulário para adicionar impressoras -->
+            <section id="print-from">
+                <form id="add-printer-form" class="mb-4">
+                    <h4>Adicionar Impressora</h4>
+                    <div class="form-group mb-3">
+                        <label for="printer-name">Nome da Impressora:</label>
+                        <input type="text" id="printer-name" class="form-control" placeholder="Ex: Epson L3150"
+                            required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="printer-model">Modelo:</label>
+                        <input type="text" id="printer-model" class="form-control" placeholder="Ex: Multifuncional"
+                            required>
+                    </div>
+                    <button type="submit">Adicionar Impressora</button>
+                </form>
+            </section>
+            <!-- Lista de Impressoras -->
+            <section id="print-from">
+                <h4>Lista de Impressoras</h4>
+                <table class="table table-bordered" id="printer-table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Modelo</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="printer-list"></tbody>
+                </table>
+            </section>
 
-<main>
-    <div class="container">
-        <section>
-            <form id="add-printer-">
-                <h4>Adicionar Impressora</h4>
-                <div class="form-group">
-                    <label for="printer-name">Nome da Impressora:</label>
-                    <input type="text" id="printer-name" placeholder="Ex: Epson L3150" required>
-                </div>
-                <div class="form-group">
-                    <label for="printer-model">Modelo:</label>
-                    <input type="text" id="printer-model" placeholder="Ex: Multifuncional" required>
-                </div>
-                <button type="submit">Adicionar Impressora</button>
-            </form>
+        </div>
+    </main>
 
-        </section>
-
-        <section class="printer-list">
-            <h4 >Lista de Impressoras</h4>
-            <ul id="printer-list" class="list-group"></ul>
-        </section>
-
-        <section class="printer-details mt-5 d-none" id="printer-details">
-            <h1>Detalhes da Impressora:</h1>
-            <p id="details-name"></p>
-            <p id="details-model"></p>
-            <p id="details-pages"></p>
-            <button id="remove-printer" class="btn btn-danger me-2">Remover Impressora</button>
-            <button id="edit-printer" class="btn btn-secondary">Editar Impressora</button>
-        </section>
-    </div>
-</main>
-
-<script src="assets\js\impressora.js" defer></script>
-
+    <script src="assets/js/impressora.js"></script>
 </body>
 
 </html>

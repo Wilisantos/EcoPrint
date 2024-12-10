@@ -10,15 +10,15 @@ import lombok.*;
 @Builder  // Gera o método builder()
 @AllArgsConstructor  // Cria um construtor com todos os campos
 @NoArgsConstructor  // Cria um construtor sem argumentos
-public class produto {
+public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;  // autoincremental
+    private int id;  // autoincremental
 
     @ManyToOne
     @JoinColumn(name = "tipo_produto_id", nullable = false)
-    private Long tipoProduto;
+    private TipoProduto tipoProduto;
 
     @Column(nullable = false)
     private String descricao;
