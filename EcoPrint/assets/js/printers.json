@@ -1,11 +1,5 @@
 [
   {
-    "name": "Epson L3150",
-    "model": "Preto e Branco",
-    "pages": 0,
-    "id": 2
-  },
-  {
     "name": "HP 12c",
     "model": "Multifuncional",
     "pages": 0,
@@ -108,9 +102,8 @@
     "id": 14
   },
   {
-    "name": "OKI B512dn",
-    "model": "Impressora a Laser Monocromática",
-    "pages": 3000,
-    "id": 15
+    "tipoImpressora": 19,
+    "modelo": "string",
+    "capacidade": 0
   }
 ]

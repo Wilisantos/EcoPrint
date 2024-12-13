@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Função para carregar as impressoras
     async function carregarTabelaImpressora() {
         try {
-            const response = await fetch('http://localhost:3000/printers');
+            const response = await fetch('http://localhost:9000/impressoras');
             if (!response.ok) throw new Error("Erro ao carregar as impressoras.");
             savedPrinters = await response.json();
             renderPrinterTable();
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Função para editar impressora no servidor
     async function editPrinter(updatedPrinter) {
         try {
-            const response = await fetch(`http://localhost:3000/printers/${updatedPrinter.id}`, {
+            const response = await fetch(`http://localhost:9000/impressoras/${updatedPrinter.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Função para remover impressora no servidor
     async function deletePrinter(printerId) {
         try {
-            const response = await fetch(`http://localhost:3000/printers/${printerId}`, {
+            const response = await fetch(`http://localhost:9000/impressoras/${printerId}`, {
                 method: 'DELETE',
             });
             if (response.ok) {
@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Função para adicionar impressora no servidor
     async function addPrinter(newPrinter) {
         try {
-            const response = await fetch('http://localhost:3000/printers', {
+            const response = await fetch('http://localhost:9000/impressoras', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
