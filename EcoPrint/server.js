@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const cors = require('cors');
 const app = express();
-const PORT = 3000;
+const PORT = 9000;
 
 // Habilitar CORS para todas as origens (para desenvolvimento)
 app.use(cors({
@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 const printersFilePath = './assets/js/printers.json';
 
 // Rota para obter as impressoras
-app.get('/printers', (req, res) => {
+app.get('/impressoras', (req, res) => {
     fs.readFile(printersFilePath, (err, data) => {
         if (err) {
             return res.status(500).send('Erro ao carregar as impressoras.');
@@ -26,7 +26,7 @@ app.get('/printers', (req, res) => {
 });
 
 // Rota para adicionar uma nova impressora
-app.post('/printers', (req, res) => {
+app.post('/impressoras', (req, res) => {
     const newPrinter = req.body;
 
     fs.readFile(printersFilePath, (err, data) => {
@@ -46,7 +46,7 @@ app.post('/printers', (req, res) => {
 });
 
 // Rota para editar uma impressora
-app.put('/printers/:id', (req, res) => {
+app.put('/impressoras/:id', (req, res) => {
     const updatedPrinter = req.body;
     const printerId = parseInt(req.params.id, 10);
 
@@ -74,7 +74,7 @@ app.put('/printers/:id', (req, res) => {
 });
 
 // Rota para remover uma impressora
-app.delete('/printers/:id', (req, res) => {
+app.delete('/impressoras/:id', (req, res) => {
     const printerId = parseInt(req.params.id, 10);
 
     fs.readFile(printersFilePath, (err, data) => {

@@ -18,13 +18,15 @@ public class OpenApiConfig {
 
     @Bean
     public OpenAPI customOpenAPI() {
-        final String activeProfile = env.getActiveProfiles()[0];
+        final String activeProfile = env.getActiveProfiles().length > 0 ? env.getActiveProfiles()[0] : "dev";
         String serverUrl = "http://localhost:9000";
 
         // Caso o ambiente seja produção, defina a URL do servidor.
         if ("prod".equalsIgnoreCase(activeProfile)) {
             serverUrl = "https://api.ecoprint.com"; // URL do servidor de produção
         }
+
+        System.out.println("Configuração do servidor Swagger: " + serverUrl);
 
         return new OpenAPI()
                 .info(new Info()
