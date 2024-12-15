@@ -21,4 +21,7 @@ public class TipoProduto {
     @Column(nullable = false, unique = true)
     private String tipo;
 
+    @Column(name="iccmodel")
+    private String iccModel;
+
 }

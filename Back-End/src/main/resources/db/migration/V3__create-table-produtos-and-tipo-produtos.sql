@@ -1,6 +1,7 @@
 CREATE TABLE tipo_produto (
     id SERIAL PRIMARY KEY,                -- Coluna auto-incrementada para o ID
-    tipo VARCHAR(255) NOT NULL UNIQUE     -- Coluna única para o tipo
+    tipo VARCHAR(255) NOT NULL UNIQUE,     -- Coluna única para o tipo
+    iccModel VARCHAR(255)
 );
 
 CREATE TABLE produto (

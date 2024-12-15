@@ -1,8 +1,8 @@
-// package com.ecoprint.control_center.repository;
+package com.ecoprint.control_center.repository;
 
-// import com.ecoprint.control_center.model.Impressao;
-// import org.springframework.data.jpa.repository.JpaRepository;
-// import org.springframework.stereotype.Repository;
+import com.ecoprint.control_center.model.Impressao;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-// @Repository
-// public interface ImpressaoRepository extends JpaRepository<Impressao, Integer> {}
+public interface ImpressaoRepository extends JpaRepository<Impressao, Integer> {
+    //long countByTipoImpressoraId(Integer tipoImpressoraId);
+}
