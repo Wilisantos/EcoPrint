@@ -1,97 +1,66 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const fs = require('fs');
+const axios = require('axios');
 const cors = require('cors');
 const app = express();
-const PORT = 9000;
+const PORT = 8000;
 
-// Habilitar CORS para todas as origens (para desenvolvimento)
-app.use(cors({
-   origin: '*'  // Permite qualquer origem, ajuste para produção conforme necessário
-}));
-
+app.use(cors());
 app.use(bodyParser.json());
 
-// Caminho para o arquivo JSON das impressoras
-const printersFilePath = './assets/js/printers.json';
+// URL do backend Spring Boot
+const SPRING_BOOT_API_URL = 'http://localhost:8978/impressoras';  // Ajuste conforme a URL do seu Spring Boot
 
 // Rota para obter as impressoras
-app.get('/impressoras', (req, res) => {
-    fs.readFile(printersFilePath, (err, data) => {
-        if (err) {
-            return res.status(500).send('Erro ao carregar as impressoras.');
-        }
-        res.json(JSON.parse(data));
-    });
+app.get('/impressoras', async (req, res) => {
+    try {
+        const response = await axios.get(SPRING_BOOT_API_URL);
+        res.json(response.data);
+    } catch (err) {
+        res.status(500).send('Erro ao carregar as impressoras.');
+    }
 });
 
 // Rota para adicionar uma nova impressora
-app.post('/impressoras', (req, res) => {
+app.post('/impressoras', async (req, res) => {
     const newPrinter = req.body;
 
-    fs.readFile(printersFilePath, (err, data) => {
-        if (err) {
-            return res.status(500).send('Erro ao carregar as impressoras.');
-        }
-        const printers = JSON.parse(data);
-        printers.push(newPrinter);
-
-        fs.writeFile(printersFilePath, JSON.stringify(printers, null, 2), (err) => {
-            if (err) {
-                return res.status(500).send('Erro ao salvar a impressora.');
-            }
-            res.status(200).send('Impressora adicionada com sucesso.');
+    try {
+        // Envia os dados para o backend Spring Boot
+        const response = await axios.post(SPRING_BOOT_API_URL, {
+            modelo: newPrinter.modelo,
+            capacidade: newPrinter.capacidade,
+            tipoImpressora: newPrinter.tipoImpressora,
         });
-    });
+        res.status(200).send('Impressora adicionada com sucesso.');
+    } catch (err) {
+        res.status(500).send('Erro ao adicionar impressora.');
+    }
 });
 
 // Rota para editar uma impressora
-app.put('/impressoras/:id', (req, res) => {
+app.put('/impressoras/:id', async (req, res) => {
     const updatedPrinter = req.body;
-    const printerId = parseInt(req.params.id, 10);
+    const printerId = req.params.id;
 
-    fs.readFile(printersFilePath, (err, data) => {
-        if (err) {
-            return res.status(500).send('Erro ao carregar as impressoras.');
-        }
-
-        let printers = JSON.parse(data);
-        const printerIndex = printers.findIndex(printer => printer.id === printerId);
-
-        if (printerIndex !== -1) {
-            printers[printerIndex] = updatedPrinter;
-
-            fs.writeFile(printersFilePath, JSON.stringify(printers, null, 2), (err) => {
-                if (err) {
-                    return res.status(500).send('Erro ao salvar a impressora.');
-                }
-                res.status(200).send('Impressora editada com sucesso.');
-            });
-        } else {
-            res.status(404).send('Impressora não encontrada.');
-        }
-    });
+    try {
+        const response = await axios.put(`${SPRING_BOOT_API_URL}/${printerId}`, updatedPrinter);
+        res.status(200).send('Impressora editada com sucesso.');
+    } catch (err) {
+        res.status(500).send('Erro ao editar impressora.');
+    }
 });
 
 // Rota para remover uma impressora
-app.delete('/impressoras/:id', (req, res) => {
-    const printerId = parseInt(req.params.id, 10);
+app.delete('/impressoras/:id', async (req, res) => {
+    const printerId = req.params.id;
 
-    fs.readFile(printersFilePath, (err, data) => {
-        if (err) {
-            return res.status(500).send('Erro ao carregar as impressoras.');
-        }
-
-        let printers = JSON.parse(data);
-        printers = printers.filter(printer => printer.id !== printerId);
-
-        fs.writeFile(printersFilePath, JSON.stringify(printers, null, 2), (err) => {
-            if (err) {
-                return res.status(500).send('Erro ao salvar a lista de impressoras.');
-            }
-            res.status(200).send('Impressora removida com sucesso.');
-        });
-    });
+    try {
+        const response = await axios.delete(`${SPRING_BOOT_API_URL}/${printerId}`);
+        res.status(200).send('Impressora removida com sucesso.');
+    } catch (err) {
+        res.status(500).send('Erro ao remover impressora.');
+    }
 });
 
 // Inicia o servidor

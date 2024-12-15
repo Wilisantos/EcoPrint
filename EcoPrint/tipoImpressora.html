@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoPrint</title>
+
+    <!-- Favicons -->
+    <link href="assets/img/planeta-terra.png" rel="icon">
+    <link href="assets/img/planeta-terra.png" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet">
+</head>
+
+<body class="index-page">
+    <header id="header" class="header d-flex align-items-center sticky-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+            <a href="index.html" class="logo d-flex align-items-center">
+                <img id="imgL" src="assets/img/titulo-ecoPrint.png" alt="EcoPrint Logo">
+            </a>
+    
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="#about">Perfil</a></li>
+                    <li class="dropdown">
+                        <a href="#"><span>Relatórios</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="#features">Insumos</a></li>
+                            <li><a href="#">Relatório de Estoque</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#"><span>Cadastrar</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="Impressora.html">Impressora</a></li>
+                            <li><a href="tipoImpressora.html" class="active">Tipo de Impressora</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#pricing">Sair</a></li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+    
+
+    <main>
+        <div class="container mt-4">
+            <!-- Formulário para adicionar tipos de impressoras -->
+            <section id="print-from">
+                <form id="add-printer-type-form" class="mb-4">
+                    <h4>Cadastrar Tipo de Impressora</h4>
+                    <div class="form-group mb-3">
+                        <label for="printer-type">Tipo de Impressora:</label>
+                        <input type="text" id="printer-type" class="form-control" placeholder="Ex: Laser, Jato de Tinta, etc." required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Cadastrar Tipo</button>
+                </form>
+            </section>
+
+            <!-- Lista de Tipos de Impressoras -->
+            <section id="printer-type-list-section">
+                <h4>Lista de Tipos de Impressoras</h4>
+                <table class="table table-bordered" id="printer-type-table">
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="printer-type-list"></tbody>
+                </table>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="assets/js/tipoImpressora.js"></script>
+</body>
+
+</html>
