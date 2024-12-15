@@ -65,15 +65,16 @@ document.addEventListener("DOMContentLoaded", () => {
         printerList.innerHTML = "";
         if (printers.length === 0) {
             const emptyRow = document.createElement("tr");
-            emptyRow.innerHTML = `<td colspan="4" class="text-center">Nenhuma impressora disponível.</td>`;
+            emptyRow.innerHTML = `<td colspan="5" class="text-center">Nenhuma impressora disponível.</td>`; // Ajuste o colspan para 5
             printerList.appendChild(emptyRow);
         } else {
             printers.forEach((printer) => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
-                    <td>${printer.modelo}</td>
-                    <td>${printer.capacidade}</td>
-                    <td>${printer.tipoImpressora.tipo}</td>
+                    <td>${printer.modelo}</td>  <!-- Nome -->
+                    <td>${printer.modelo}</td>  <!-- Modelo -->
+                    <td>${printer.tipoImpressora.tipo}</td>  <!-- Tipo -->
+                    <td>${printer.capacidade}</td>  <!-- Capacidade -->
                     <td>
                         <button class="btn btn-info btn-sm" onclick="showPrinterDetails(${printer.id})">Editar</button>
                         <button class="btn btn-danger btn-sm" onclick="removePrinter(${printer.id})">Remover</button>
