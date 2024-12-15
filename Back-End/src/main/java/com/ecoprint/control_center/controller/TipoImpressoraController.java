@@ -2,6 +2,7 @@ package com.ecoprint.control_center.controller;
 
 import com.ecoprint.control_center.dto.TipoImpressoraRequestDTO;
 import com.ecoprint.control_center.model.TipoImpressora;
+import com.ecoprint.control_center.repository.ImpressoraRepository;
 import com.ecoprint.control_center.repository.TipoImpressoraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,6 +19,9 @@ public class TipoImpressoraController {
 
     @Autowired
     private TipoImpressoraRepository tipoImpressoraRepository;
+
+    @Autowired
+    private ImpressoraRepository impressoraRepository;
 
     // CREATE - Adiciona um novo tipo de impressora
     @PostMapping
@@ -77,6 +81,13 @@ public class TipoImpressoraController {
 
         if (!tipoImpressoraOpt.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+
+        // Verifica se o tipo de impressora está vinculado a alguma impressora
+        long count = impressoraRepository.countByTipoImpressoraId(id);
+        if (count > 0) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(null); // Retorna 400 se o tipo de impressora estiver vinculado
         }
 
         tipoImpressoraRepository.delete(tipoImpressoraOpt.get());
