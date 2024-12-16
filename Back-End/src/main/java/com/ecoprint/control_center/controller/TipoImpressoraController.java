@@ -94,4 +94,8 @@ public class TipoImpressoraController {
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
+    @GetMapping("/count")
+    public long countImpressoras() {
+        return tipoImpressoraRepository.count();
+    }
 }

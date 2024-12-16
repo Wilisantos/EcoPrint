@@ -301,3 +301,34 @@ document.getElementById("formPontoColeta").addEventListener("submit", async func
     console.error(error);
   }
 });
+
+async function carregarNumeroImpressoras() {
+  try {
+    // Fazer a chamada à API
+    const response = await fetch('http://localhost:9000/impressoras/count');
+    
+    if (!response.ok) {
+      throw new Error("Erro ao carregar o número de impressoras.");
+    }
+
+    // Obter o total de impressoras
+    const totalImpressoras = await response.json();
+
+    // Verificar o valor retornado para garantir que é um número
+    if (typeof totalImpressoras === 'number') {
+      // Atualizar o conteúdo do HTML com o número de impressoras
+      document.getElementById("numero-impressoras").value = totalImpressoras;
+    } else {
+      // Caso a resposta não seja numérica, exiba uma mensagem de erro
+      document.getElementById("numero-impressoras").value = 'Erro ao carregar';
+    }
+
+  } catch (error) {
+    // Em caso de erro, mostrar mensagem de erro e não travar o carregamento
+    console.error("Erro:", error.message);
+    document.getElementById("numero-impressoras").value = 'Erro ao carregar';
+  }
+}
+
+// Chamar a função ao carregar a página
+window.onload = carregarNumeroImpressoras;

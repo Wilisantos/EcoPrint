@@ -26,9 +26,8 @@ public class Impressao {
     @Column(nullable = true, name = "iccmodel")
     private String iccModel;
 
-    @Lob  // Usado para armazenar grandes dados, como imagens ou arquivos binários
     @Column(nullable = true, name = "dadosimagem", columnDefinition = "bytea")
-    private byte[] dadosImagem;  // Campo para armazenar a imagem em Base64
+    private String dadosImagem;  // Campo para armazenar a imagem em Base64
 
     @Column(name = "cmykpredictor")
     private String cmykPredictor;

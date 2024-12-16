@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressão</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Impressão</h2>
+        <form id="print-form">
+            <div class="form-group">
+                <label for="fileDescription">Descrição</label>
+                <input type="text" id="fileDescription" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="fileAttachment">Anexar Arquivo</label>
+                <input type="file" id="fileAttachment" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar Impressão</button>
+        </form>
+    </div>
+
+    <script src="assets/js/printPage.js"></script>
+</body>
+</html>

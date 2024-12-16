@@ -53,4 +53,10 @@ public class ImpressoraController {
             .orElseThrow(() -> new IllegalArgumentException("Impressora nao existe"));
         impressoraRepository.deleteById(id);
     }
+
+    @GetMapping("/count")
+    public long countImpressoras() {
+        return impressoraRepository.count();
+    }
+
 }
