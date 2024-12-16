@@ -748,14 +748,14 @@ section,
   color: var(--accent-color);
 }
 
-.hero .icon-box:hover {
+/* .hero .icon-box:hover {
   background-color: var(--accent-color);
-}
+} */
 
-.hero .icon-box:hover .title a,
+/* .hero .icon-box:hover .title a,
 .hero .icon-box:hover .icon {
   color: var(--contrast-color);
-}
+} */
 
 /*--------------------------------------------------------------
 # About Section

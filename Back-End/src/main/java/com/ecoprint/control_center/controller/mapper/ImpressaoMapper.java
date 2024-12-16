@@ -28,7 +28,7 @@ public class ImpressaoMapper {
                 .produto(produto)
                 .descricao(impressaoDTO.descricao())
                 .cmykPredictor(impressaoDTO.cmykPredictor())
-                //.iccModel(produtoRepository.findIccModelById(impressaoDTO.produtoId()))
+                .iccModel(produtoRepository.findIccModelById(impressaoDTO.produtoId()))
                 .dadosImagem(impressaoDTO.dadosImagem())
                 .build();
     }

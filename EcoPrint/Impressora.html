@@ -25,24 +25,18 @@
     <!-- Main CSS File -->
     <link href="assets/css/main.css" rel="stylesheet">
 </head>
+
 <body class="index-page">
     <header id="header" class="header d-flex align-items-center sticky-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
             <a href="index.html" class="logo d-flex align-items-center">
                 <img id="imgL" src="assets/img/titulo-ecoPrint.png" alt="EcoPrint Logo">
             </a>
-    
+
             <nav id="navmenu" class="navmenu">
                 <ul>
                     <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="#about">Perfil</a></li>
-                    <li class="dropdown">
-                        <a href="#"><span>Relatórios</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                        <ul>
-                            <li><a href="#features">Insumos</a></li>
-                            <li><a href="#">Relatório de Estoque</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="#about">Sobre</a></li>
                     <li class="dropdown">
                         <a href="#"><span>Cadastrar</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
@@ -50,13 +44,11 @@
                             <li><a href="tipoImpressora.html" class="active">Tipo de Impressora</a></li>
                         </ul>
                     </li>
-                    <li><a href="#pricing">Sair</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
         </div>
     </header>
-    
 
     <main>
         <div class="container mt-4">
@@ -80,16 +72,12 @@
                         <label for="printer-tipoImpressora">Tipo de Impressora:</label>
                         <select id="printer-tipoImpressora" class="form-control" required>
                             <option value="">Selecione o tipo</option>
-                            <!-- Adicionar os tipos de impressora dinamicamente aqui -->
-                            <option value="1">ImpressoraTeste</option>
-                            <option value="2">ImpressoraTeste2</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Adicionar Impressora</button>
                 </form>
             </section>
 
-            
             <!-- Lista de Impressoras -->
             <section id="printer-list-section">
                 <h4>Lista de Impressoras</h4>
@@ -104,9 +92,8 @@
                         </tr>
                     </thead>
                     <tbody id="printer-list"></tbody>
-                </table>                
+                </table>
             </section>
-
         </div>
     </main>
 
