@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const printerForm = document.getElementById("add-printer-form");
     const printerList = document.getElementById("printer-list");
     const printerTipoImpressora = document.getElementById("printer-tipoImpressora");
-
     let currentEditPrinter = null; // Variável para armazenar a impressora em edição
 
     // Função para carregar os tipos de impressora
@@ -71,15 +70,16 @@ document.addEventListener("DOMContentLoaded", () => {
             printers.forEach((printer) => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
-                    <td>${printer.modelo}</td>  <!-- Nome -->
-                    <td>${printer.modelo}</td>  <!-- Modelo -->
-                    <td>${printer.tipoImpressora.tipo}</td>  <!-- Tipo -->
-                    <td>${printer.capacidade}</td>  <!-- Capacidade -->
-                    <td>
-                        <button class="btn btn-info btn-sm" onclick="showPrinterDetails(${printer.id})">Editar</button>
-                        <button class="btn btn-danger btn-sm" onclick="removePrinter(${printer.id})">Remover</button>
-                    </td>
-                `;
+                <td>${printer.modelo}</td>  <!-- Nome -->
+                <td>${printer.modelo}</td>  <!-- Modelo -->
+                <td>${printer.tipoImpressora.tipo}</td>  <!-- Tipo -->
+                <td>${printer.capacidade}</td>  <!-- Capacidade -->
+                <td>
+                    <button class="btn btn-info btn-sm" onclick="showPrinterDetails(${printer.id})">Editar</button>
+                    <button class="btn btn-danger btn-sm" onclick="removePrinter(${printer.id})">Remover</button>
+                    <button class="btn btn-primary btn-sm" onclick="window.location.href = 'printPage.html?printerId=${printer.id}'">Imprimir</button> <!-- Botão Imprimir -->
+                </td>
+            `;
                 printerList.appendChild(row);
             });
         }
@@ -215,8 +215,42 @@ document.addEventListener("DOMContentLoaded", () => {
         printerForm.reset();
     }
 
-    // Carregar os tipos de impressora ao carregar a página
+    // Função que é chamada quando clica no botão "Imprimir"
+    window.printJob = (printerId) => {
+        $('#printModal').modal('show'); // Exibe o modal
+
+        // Lógica para enviar os dados do formulário de impressão
+        document.getElementById("submitPrint").addEventListener("click", () => {
+            const description = document.getElementById("fileDescription").value;
+            const fileAttachment = document.getElementById("fileAttachment").files[0];
+
+            if (description && fileAttachment) {
+                const formData = new FormData();
+                formData.append("description", description);
+                formData.append("file", fileAttachment);
+
+                // Aqui você pode enviar o formData para o servidor
+                // Exemplo de como enviar os dados via AJAX:
+                fetch("http://localhost:9000/impressao", {
+                    method: "POST",
+                    body: formData,
+                }).then(response => response.json())
+                  .then(data => {
+                      console.log("Impressão realizada", data);
+                      alert("Impressão realizada com sucesso!");
+                      $('#printModal').modal('hide'); // Fecha o modal após o envio
+                  })
+                  .catch(error => {
+                      console.error("Erro na impressão", error);
+                      alert("Erro ao enviar a impressão.");
+                  });
+            } else {
+                alert("Por favor, preencha todos os campos.");
+            }
+        });
+    };
+
+    // Carregar os dados ao iniciar
     carregarTiposImpressora();
-    // Carregar a tabela de impressoras ao carregar a página
     carregarTabelaImpressora();
 });

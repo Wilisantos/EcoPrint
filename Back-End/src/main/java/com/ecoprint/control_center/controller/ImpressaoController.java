@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -29,6 +28,12 @@ public class ImpressaoController {
         Impressao impressao = impressaoMapper.toModel(impressaoRequestDTO);
         return impressaoRepository.save(impressao);
     }
+
+    @GetMapping("/count")
+    public long countImpressoras() {
+        return impressaoRepository.count();
+    }
+
     @GetMapping
     public ResponseEntity<String> gerarRelatorioCSV() {
         StringWriter writer = new StringWriter();

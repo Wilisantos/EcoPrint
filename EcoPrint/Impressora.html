@@ -24,6 +24,11 @@
 
     <!-- Main CSS File -->
     <link href="assets/css/main.css" rel="stylesheet">
+
+    <!-- Adicionando jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- CDN do jQuery -->
+    <!-- Adicionando Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script> <!-- Bootstrap JS -->
 </head>
 
 <body class="index-page">
@@ -96,6 +101,34 @@
             </section>
         </div>
     </main>
+
+    <!-- Modal para impressão -->
+    <div id="print-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Enviar Impressão</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="print-form">
+                        <div class="form-group mb-3">
+                            <label for="print-description">Descrição:</label>
+                            <input type="text" id="print-description" class="form-control" placeholder="Descrição da impressão" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="file-upload">Anexo (Arquivo para impressão):</label>
+                            <input type="file" id="file-upload" class="form-control" required>
+                        </div>
+                        <input type="hidden" id="selected-printer-id">
+                        <button type="submit" class="btn btn-primary">Imprimir</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="assets/js/impressora.js"></script>
 </body>

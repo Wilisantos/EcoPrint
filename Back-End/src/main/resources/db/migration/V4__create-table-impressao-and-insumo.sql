@@ -10,6 +10,6 @@ CREATE TABLE impressao (
     descricao VARCHAR(255) NOT NULL,     -- Descrição da impressão
     produto_id INT NOT NULL,
     iccModel VARCHAR(255),               -- Modelo ICC
-    dadosImagem BYTEA,                     -- Dados da imagem (alterado para OID, tipo adequado para grandes objetos binários)
+    dadosImagem TEXT,                     -- Dados da imagem (alterado para OID, tipo adequado para grandes objetos binários)
     cmykPredictor VARCHAR(255)          -- Previsor de CMYK
 );
