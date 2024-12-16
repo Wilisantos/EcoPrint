@@ -6,7 +6,10 @@ CREATE TABLE insumo (
 );
 
 CREATE TABLE impressao (
-    id SERIAL PRIMARY KEY,                -- Coluna auto-incrementada para o ID
-    custo BIGINT NOT NULL,                -- Custo da impressão
-    insumos_utilizados BIGINT[] NOT NULL  -- Lista de insumos utilizados
+    id SERIAL PRIMARY KEY,               -- Coluna auto-incrementada para o ID
+    descricao VARCHAR(255) NOT NULL,     -- Descrição da impressão
+    produto_id INT NOT NULL,
+    iccModel VARCHAR(255),               -- Modelo ICC
+    dadosImagem BYTEA,                     -- Dados da imagem (alterado para OID, tipo adequado para grandes objetos binários)
+    cmykPredictor VARCHAR(255)          -- Previsor de CMYK
 );

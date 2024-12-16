@@ -244,5 +244,60 @@ initMap();
 }
 )();
 
+async function gerarRelatorio() {
+  try {
+    const response = await fetch('http://localhost:9000/impressoes', {
+      method: 'GET',
+      headers: {
+        'Accept': 'text/csv', // Especificando que esperamos um arquivo CSV
+      }
+    });
 
+    if (response.ok) {
+      const blob = await response.blob(); // Recebe o conteúdo como blob
+      const url = window.URL.createObjectURL(blob); // Cria um URL para o blob
+      const link = document.createElement('a'); // Cria um link temporário
+      link.href = url;
+      link.download = 'relatorio_impressoes.csv'; // Nome do arquivo para o download
+      link.click(); // Simula o clique para iniciar o download
+      window.URL.revokeObjectURL(url); // Libera o URL criado
+    } else {
+      alert('Erro ao gerar o relatório');
+    }
+  } catch (error) {
+    console.error('Erro ao gerar o relatório:', error);
+    alert('Erro ao conectar com o servidor');
+  }
+}
 
+document.getElementById("formPontoColeta").addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  const descricao = document.getElementById("descricao").value;
+  const tipoResiduos = document.getElementById("tipoResiduos").value.split(",").map(Number);
+
+  const payload = {
+    descricao,
+    tipoResiduos,
+  };
+
+  try {
+    const response = await fetch("http://localhost:9000/pontos-reciclagem", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (response.ok) {
+      document.getElementById("status").innerHTML = `<p class="text-success">Ponto de coleta adicionado com sucesso!</p>`;
+      document.getElementById("formPontoColeta").reset();
+    } else {
+      document.getElementById("status").innerHTML = `<p class="text-danger">Erro ao adicionar ponto de coleta: ${response.statusText}</p>`;
+    }
+  } catch (error) {
+    document.getElementById("status").innerHTML = `<p class="text-danger">Erro ao conectar ao servidor.</p>`;
+    console.error(error);
+  }
+});

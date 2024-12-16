@@ -3,6 +3,9 @@ spring:
     name: control-center
   jpa:
     open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
   jackson:
     date-format: "yyyy-MM-dd HH:mm:ss"

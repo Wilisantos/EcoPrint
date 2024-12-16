@@ -38,17 +38,8 @@ app.post('/impressoras', async (req, res) => {
     }
 });
 
-// Rota para editar uma impressora
-app.put('/impressoras/:id', async (req, res) => {
-    const updatedPrinter = req.body;
-    const printerId = req.params.id;
+app.post('/impressoras/:id/imprimir', async (req, res) => {
 
-    try {
-        const response = await axios.put(`${SPRING_BOOT_API_URL}/${printerId}`, updatedPrinter);
-        res.status(200).send('Impressora editada com sucesso.');
-    } catch (err) {
-        res.status(500).send('Erro ao editar impressora.');
-    }
 });
 
 // Rota para remover uma impressora

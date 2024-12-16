@@ -1,9 +1,9 @@
-// package com.ecoprint.control_center.dto;
+package com.ecoprint.control_center.dto;
 
-// import java.util.List;
-
-// public record ImpressaoRequestDTO(
-//         int id,
-//         Long custo,
-//         List<Long> insumosUtilizados
-// ) {}
+public record ImpressaoRequestDTO(
+        int produtoId ,      // ID do tipo de produto
+        String cmykPredictor,
+        byte[] dadosImagem,     // Array de bytes para os dados da imagem
+        String descricao
+) {
+}
